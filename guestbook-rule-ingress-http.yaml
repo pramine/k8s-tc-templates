@@ -5,7 +5,7 @@ metadata:
   name: guestbook-ingress
 spec:
   rules:
-  - host: guestbook.k8s02apps.lab.local
+  - host: guestbook.k8s01apps.lab.local
     http:
       paths:
       - path:
