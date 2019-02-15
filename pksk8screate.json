@@ -1,13 +1,13 @@
 {
-  "name": "string",
-  "network_profile_name": "string",
+  "name": "k8s03",
+  "network_profile_name": null,
   "parameters": {
-    "authorization_mode": "string",
-    "kubernetes_master_host": "string",
+    "authorization_mode": null,
+    "kubernetes_master_host": "CLUSTER_API_FQDN",
     "kubernetes_master_port": 8443,
-    "kubernetes_worker_instances": 0,
-    "nsxt_network_profile": "string",
-    "worker_haproxy_ip_addresses": "string"
+    "kubernetes_worker_instances": 3,
+    "nsxt_network_profile": null,
+    "worker_haproxy_ip_addresses": null
   },
-  "plan_name": "string"
+  "plan_name": "PLAN_NAME"
 }
