@@ -26,10 +26,10 @@ kind: Service
 metadata:
   name: nginx-svc
   labels:
-    app: nginx01
+    app: nginx
 spec:
   ports:
     - port: 80
   selector:
-    app: nginx01
+    app: nginx
   type: LoadBalancer
