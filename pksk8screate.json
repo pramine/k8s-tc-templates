@@ -1,0 +1,13 @@
+{
+  "name": "string",
+  "network_profile_name": "string",
+  "parameters": {
+    "authorization_mode": "string",
+    "kubernetes_master_host": "string",
+    "kubernetes_master_port": 8443,
+    "kubernetes_worker_instances": 0,
+    "nsxt_network_profile": "string",
+    "worker_haproxy_ip_addresses": "string"
+  },
+  "plan_name": "string"
+}
