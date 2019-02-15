@@ -24,7 +24,7 @@ spec:
         resources:
           requests:
             cpu: 200m
-          # memory: 256Mi
+            memory: 256Mi
 ---
 apiVersion: v1
 items:
