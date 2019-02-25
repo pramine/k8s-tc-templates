@@ -433,12 +433,14 @@ Populate the *Kubernetes server endpoint*,*Context name*, and *Cluster name* val
 
 Scroll to the next section, *Build*
 Enter the kubectl commands to execute from the shell, for instance
+>Note: Be sure to update the context and the nginx image path and tag.
 ```
 kubectl create ns frontend-test
 kubectl config set-context k8s01staging --namespace=frontend-test
 kubectl run nginx01 --image=harbor.lab.local/library/nginx:v1 --replicas=4 --port=80
 kubectl expose deployment nginx01 --port=80 --type=LoadBalancer
 sleep 30
+curl http://nginx01.frontend-test.svc.cluster.local
 kubectl get all
 kubectl delete ns frontend-test
 ```
