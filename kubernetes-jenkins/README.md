@@ -291,55 +291,13 @@ Select **OK**
 Again, Select **Add Credentials** \
 Select the *Kind* drop-down and choose **Kubernetes configuration (kubeconfig)**
 
-Open a command-line and run, \
-`$ kubectl get sa` \
-`$ kubectl describe sa jenkins` \
-Record the secret value from the *Tokens:* parameter
-```
-Tokens:              jenkins-token-6xx5l
-```
-`$ kubectl config view` \
-Record the URL value from the *server* parameter
-```
-apiVersion: v1
-clusters:
-- cluster:
-    server: https://pksk8s01api.lab.local:8443
-```
-With a vi or another text editor, edit the file *svc-acct-kubeconfig.sh*. \
-For the *server* variable, enter the *server* value from the kubectl config view output. \
-For the *name* variable, enter the *Tokens* value from the kubectl describe sa jenkins output. \
-Save and close the file. Then, run the commands to execute the script and generate a skeleton kubeconfig for the service account\
-`$ chmod +x svc-acct-kubeconfig.sh` \
-`$ ./svc-acct-kubeconfig.sh` \
-With a vi or another text editor, edit the new file sa.kubeconfig, and compare the contents to the output from `$ kubectl config view`. Replace the "default-cluster" and "default-context" with the values from the `$ kubectl config view` output. Replace the default (namespace) value with the name of the jenkins namespace.  Replace default-user value with the name of the service account. For example,
+Open a command-line and make the following script executable, \
+`$ chmod +x exist-sa_kubecfg.sh` \
+Then, execute the script followed by the service account name and namespace name. In this case, "jenkins" for both values \
+`$ ./exist-sa_kubecfg.sh jenkins jenkins` \
+The script creates a new file in the present directory, named jenkins-sa.kubeconfig.  With a text-editor compare the contents to the output from `$ kubectl config view` and verify the context, server, and cluster values match.
 
-```
-apiVersion: v1
-kind: Config
-clusters:
-- name: k8s01staging
-  cluster:
-    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMrekNDQWVPZ0F3SUJBZ0lVUDVpUHd0RlJJSjdwM0NsSE9PU3pKK3ZUR2ZZd0RRWUpLb1pJaHZjTkFRRUwKQ
-    <Truncated>
-    5QOFVFWjNyblZXWVRidWNxeDEzdUV3b2lvQi93dU4vUFkKcWI2UkdjRW1qbUNFR1gwT0tiaG9rL1BYS3RzZ1ZrY0EzdURCeldZRm1HVUhhQTdJWEplTys3Q0pPMVEzQk13PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    server: https://pksk8s01api.lab.local:8443
-contexts:
-- name: k8s01staging
-  context:
-    cluster: k8s01staging
-    namespace: jenkins
-    user: jenkins
-current-context: k8s01staging
-users:
-- name: jenkins
-  user:
-    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1l
-    c3BhY2UiOiJqZW5raW5zIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImplbmtpbnMtdG9rZW4tNnh4NWwiLCJrdWJlcm5ldGVzL
-    <Truncated>
-    pt7EGu-Z-I5gkLget_AGRrk8KxE-xjRr06gYg7pQ8UggGo3L-ocx3QO-nsVUhnr3-d7XyCDNncivXNlMy4n6-oPXpTbbxb9_nXe_rc3XXBi5O0hkHh0k_SuiVWygvtNrmYH-m8v-isUZFO57IjXC0I7_OJZxZKnrAE-WZ9vFIQOBI-rHVT7n1A1PfZglix-ylgKgJxBoVEFhSwypjDAxbF6FA
-```
-Return to the Jenkins Web UI, where you left off configuring the **Kubernetes configuration (kubeconfig)** credentials. Enter a *description* such as **Jenkins Service Account Kubeconfig**. Select the radio button for **Enter Directly**. Paste the content from the updated *sa.kubeconfig* file
+Return to the Jenkins Web UI, where you left off configuring the **Kubernetes configuration (kubeconfig)** credentials. Enter a *description* such as **Jenkins Service Account Kubeconfig**. Select the radio button for **Enter Directly**. Paste the content from the updated *jenkins-sa.kubeconfig* file
 
 ![alt text](https://github.com/csaroka/kubernetes-jenkins/blob/master/images/sa-kubeconfig.png)
 
