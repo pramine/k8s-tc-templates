@@ -12,9 +12,6 @@ if [[ -z "$1" ]] || [[ -z "$2" ]]; then
  exit 1
 fi
 
-# your server name goes here
-# server=https://k8slabapi.lab.local:8443
-# username=jenkins
 currentcontext=$(kubectl config view -o jsonpath='{.current-context}')
 server=$(kubectl config view -o jsonpath='{.clusters[?(@.name == "'${currentcontext}'")].cluster.server}')
 secretname=$(kubectl get sa $1 -n $2 -o jsonpath='{.secrets[*].name}')
