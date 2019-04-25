@@ -2,7 +2,7 @@
 # Note: kubeconfig generated based on user's current-context
 # Note: Before running, create a service account
 # $ chmod +x <filename>
-# $ ./<filename> <service account name>
+# $ ./<filename> <service account name> <existing namespace>
 #
 set -e
 set -o pipefail
